@@ -1,35 +1,16 @@
-# [template]-quiz-notes
+import datetime as dt
+from datetime import date, time, datetime as dt
+from datetime import timezone
+import pytz
+from datetime import timedelta
+from datetime import datetime, timedelta, time
 
-## Quiz Questions
+def calc_age(birth_date):
+  today = date.today()
+  age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+  return age
 
-Answer the following questions in the provided markdown file before turning in this exercise:
-
-- [Question]
-
-## Notes
-
-All student notes should be written here.
-
-How to write `Code Examples` in markdown
-
-for JS:
-
-```js
-const data = 'Howdy';
-```
-
-for HTML:
-
-```html
-<div>
-  <p>This is text content</p>
-</div>
-```
-
-for CSS:
-
-```css
-div {
-  width: 100%;
-}
-```
+birth_date_str = input('please enter birthdate here (YYYY-MM-DD): ').split('-')
+birth_date = date(int(birth_date_str[0]), int(birth_date_str[1]), int(birth_date_str[2]))
+age = calc_age(birth_date)
+print(age)
