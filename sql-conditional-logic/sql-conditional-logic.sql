@@ -1,6 +1,6 @@
 USE telecom;
 
-# 1
+# part 1
 SELECT *,
 	CASE 
 		WHEN volume < 100 THEN "low"
@@ -14,7 +14,7 @@ SELECT volume_1, count(*)
 from dsstudent.log_feature_table
 group by volume_1;
 
-# 2
+# part 2
 
 USE hr;
 
