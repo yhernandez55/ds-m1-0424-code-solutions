@@ -1,6 +1,6 @@
 USE telecom;
 # ex 1: SELECT/FROM/AS
-SELECT lf.id, lf.log_feature, lf.volume  
+SELECT lf.id, lf.log_feature AS log, lf.volume AS vol
 FROM log_feature lf;
 
 
@@ -13,19 +13,19 @@ LIMIT 5;
 
 SELECT id, resource_type
 FROM resource_type
-ORDER BY id ASC
+ORDER BY id DESC
 LIMIT 5;
 
 SELECT id, resource_type 
 FROM resource_type rt 
-ORDER BY id,resource_type  ASC 
+ORDER BY id,resource_type DESC
 LIMIT 5;
 
 # ex 3: COUNT /DISTINCT
 SELECT 
-    COUNT(*),
-    COUNT(DISTINCT id),
-    COUNT(DISTINCT severity_type) 
+    COUNT(*) AS numbers_row,
+    COUNT(DISTINCT id) AS id_nunique,
+    COUNT(DISTINCT severity_type) AS severity_type_nunique
 FROM 
     severity_type;
 
