@@ -16,12 +16,12 @@ SELECT
 FROM loandb.train t;
    
   # 3
-SELECT (DAYS_BIRTH / -365.0) AS age
+SELECT round((DAYS_BIRTH / -365.0)) AS age
 FROM loandb.train t;
  
 # 4
 SELECT
-    OCCUPATION_TYPE,
+    OCCUPATION_TYPE AS occupation_type,
     COUNT(*) AS quantity 
 FROM loandb.train t 
 WHERE  occupation_type IS NOT NULL
@@ -50,5 +50,5 @@ FROM loandb.installments_payments ip
 	LEFT JOIN loandb.train t ON ip.SK_ID_CURR = t.SK_ID_CURR 
 GROUP BY t.target;
 	
-
+DROP TABLE storage; 
 
