@@ -25,18 +25,22 @@ most_frequent_buyer
 # 2
 """
 
-profit_to_cost = df.groupby('Contact Sex')['Profit'].sum()
+df['Profit_to_Cost'] = df['Profit'] / (df['Our Cost'] + df['Shipping Cost'])
+profit_to_cost = df.groupby('Contact Sex')['Profit_to_Cost'].sum()
 profit_to_cost
 
-"""Based on question 1, we can say that males should be targeted if the business is cash-constrained, since males were the more frequent buyers.
+"""If bussiness is cash constrainted then we can say that males should be targeted since the ratio of profit to 'Our Cost' and "Shipping Cost' is higher compared to females.
 
 # 3
+
+If consumer is cash-constrained, which gender should be targeted?
 """
 
-cost_to_the_customer = df.groupby('Contact Sex')['Our Cost'].sum()
+df['Profit_to_Cost'] = df['Profit'] / (df['Sale Price'] + df['Shipping Cost'])
+cost_to_the_customer = df.groupby('Contact Sex')['Profit_to_Cost'].sum()
 cost_to_the_customer
 
-"""We can say that males should be targeted if consumers are cash-constrained, since they are more likely to purchase technololgy.
+"""If consumer is cash constrainted then Males are more likely to purchase technololgy therefore they should be targeted based on the ratio of 'Proft' to 'Sales Price' and 'Shipping Cost'
 
 # 4
 """
