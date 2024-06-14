@@ -1,10 +1,8 @@
-
 USE dsstudent;
 
 # 1: 
 CREATE TABLE customer_Yanelly(
-   insert_order INT AUTO_INCREMENT PRIMARY KEY,
-   customer_id SMALLINT,
+   customer_id SMALLINT PRIMARY KEY,
    name VARCHAR(20),
    location VARCHAR(20),
    total_expenditure VARCHAR(20),
@@ -48,7 +46,7 @@ SET gender = CASE
     WHEN customer_id = 1716 THEN 'M'
 END;
 
-SELECT customer_id, name, location, total_expenditure, gender 
+SELECT * 
 FROM customer_Yanelly;
 
 # 6: 
