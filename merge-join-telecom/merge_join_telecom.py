@@ -66,4 +66,4 @@ train_event
 # 6
 ndup = merge_tables.drop_duplicates()
 
-ndup.reset_index(drop=True)
+ndup.reset_index(drop=True) 
