@@ -35,13 +35,13 @@ stroke1 = grouped_stroke.get_group(1)
 stroke1.head()
 
 # 5
-stroke_float = stroke.select_dtypes(include = 'float')
+stroke_float = stroke1.select_dtypes(include = 'float')
 stroke_float
 
 stroke_float.describe()
 
 # 6
-stroke_integer = stroke.describe(include='int')
+stroke_integer = stroke1.describe(include='int')
 stroke_integer.describe(percentiles=[])
 
 # 7
