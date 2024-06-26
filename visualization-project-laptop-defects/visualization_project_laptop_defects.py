@@ -69,37 +69,43 @@ plt.gca().xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter('%b %Y'))
 # 4
 fig, ax1 = plt.subplots(figsize=(10, 6))
 
-# the first x-axis: Defects
+# Plot defects and opportunities on ax1 (left y-axis)
 ax1.plot(df.index, df['Defects'], color='r', marker='o', label='Defects')
-ax1.set_ylabel('Defects', color='r')
+ax1.plot(df.index, df['Opportunities'], color='b', marker='o', label='Opportunities')
+ax1.set_ylabel('Number of Defects/Opportunities', color='k')
 
 # formatting it as month and year
 ax1.xaxis.set_major_formatter(plt.matplotlib.dates.DateFormatter('%b %Y'))
 
-# Plotting Secondary axis: Opportunities
+# Create ax2 (right y-axis) for defect rate
 ax2 = ax1.twinx()
-ax2.plot(df.index, df['Opportunities'], color='b', marker='o', label='Opportunities')
-ax2.set_ylabel('Opportunities', color='b')
+ax2.plot(df.index, defect_rate, color='g', marker='o', label='Defect Rate')
+ax2.axhline(y=mean_defect_rate, color='blue', linestyle='--', label='Mean Defect Rate')
+ax2.axhline(y=limit_2std[0], color='orange', linestyle='--', label='UCL (Mean + 2σ)')
+ax2.axhline(y=limit_3std[0], color='green', linestyle='--', label='UCL (Mean + 3σ)')
+ax2.set_ylabel('Defect Rate', color='k')
 
-# Plotting first axis
-ax1.plot(df.index, defect_rate, color='g', marker='o', label='Defect Rate')
-ax1.axhline(y=mean_defect_rate, color='orange', linestyle='--', label='Mean Defect Rate')
-ax1.axhline(y=limit_2std[0], color='magenta', linestyle='--', label='UCL (Mean + 2σ)')
-ax1.axhline(y=limit_3std[0], color='cyan', linestyle='--', label='UCL (Mean + 3σ)')
-
-
+# Set title and legends
 ax1.set_title('Defects, Opportunities, and Defect Rate Over Time')
-plt.legend()
+fig.legend(loc='lower left')
 
 plt.show()
 
-"""** # 5**
+# 5 
+# Points to label
+points_to_label = [defect_rate.idxmax(), df['Opportunities'].idxmax(), df['Defects'].idxmax()]
+labels = ['max defect rate', 'max opportunities', 'max defects']
 
+# Print the points
+for point, label in zip(points_to_label, labels):
+    if label == 'max defect rate':
+        print(f"{label}: Date = {point}, Value = {defect_rate[point]}")
+        ax2.annotate(label, (point, defect_rate[point]), textcoords="offset points", xytext=(0,10), ha='center', color='g')
+    elif label == 'max opportunities':
+        print(f"{label}: Date = {point}, Value = {df['Opportunities'][point]}")
+        ax1.annotate(label, (point, df['Opportunities'][point]), textcoords="offset points", xytext=(0,10), ha='center', color='b')
+    elif label == 'max defects':
+        print(f"{label}: Date = {point}, Value = {df['Defects'][point]}")
+        ax1.annotate(label, (point, df['Defects'][point]), textcoords="offset points", xytext=(0,10), ha='center', color='r')
 
-1.  for the first plot we can see that the # of defects is lower around July 2016  and higher when around July 2018, although around July 2017 we see a big spike of defects.
-2.   for the second graph we can see that the number of opportunites over time have a more stable outcome compared to the first plot, since the first plot has deeper spikes and multiple. And we could see that it's most steady around April to October 2017.
-3.  The last plot tells you about the defected rates trends in where it fluctuates and where it is the most stable, here we see that it fluctuates between July 2016 and before October 2016 and then it is the most stable after October 2016.
-
-
-
-"""
+plt.show()
