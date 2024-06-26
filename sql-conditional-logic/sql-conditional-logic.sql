@@ -1,6 +1,7 @@
 USE telecom;
 
 # part 1
+CREATE TEMPORARY TABLE temp_log_feature AS
 SELECT *,
 	CASE 
 		WHEN volume < 100 THEN "low"
@@ -11,8 +12,8 @@ SELECT *,
 FROM log_feature;
 
 SELECT volume_1, count(*)
-from dsstudent.log_feature_table
-group by volume_1;
+FROM temp_log_feature
+GROUP BY volume_1;
 
 # part 2
 
@@ -35,3 +36,4 @@ SELECT e.EmployeeNumber, e.Gender,
 FROM employee e;
 
 
+DROP TEMPORARY TABLE temp_log_feature;
