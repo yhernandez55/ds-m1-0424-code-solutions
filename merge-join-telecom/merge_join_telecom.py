@@ -31,14 +31,14 @@ test
 
 train
 
-# 1 merging the tables 
+# 1 
 merge_tables = pd.merge(train, event)
 merge_tables = pd.merge(merge_tables, severity)
 merge_tables = pd.merge(merge_tables, resources)
 merge_tables = pd.merge(merge_tables, log)
 merge_tables
 
-# 2 merge train and test on id for inner and outer
+# 2
 inner = pd.merge(train,test, on='id', how='inner')
 inner
 
@@ -47,7 +47,7 @@ outer
 
 """The difference bewtween inner and outer is that inner only includes values that are common in both data frmaes while outer is including everything of each data frame."""
 
-# 3 left join and right join 
+# 
 joined = train.join(event, lsuffix='_l', rsuffix='_r')
 joined
 
@@ -56,14 +56,14 @@ merged
 
 """the difference between join and merge is that join combines the data frame on the key col or an index, while ther merge function joins based on the data frames common column or common indice. As shown up above."""
 
-# 4 Dividing the datasets into 2 dataframes
+# 4 
 train = train.iloc[0:10000]
 event = event.iloc[10000:]
-# 5 Using concat to combine the 2 dataframes
+# 5 
 train_event = pd.concat([train, event], axis=1)
 train_event
 
-# 6 droping duplicates
+# 6 
 ndup = merge_tables.drop_duplicates()
 
 ndup.reset_index(drop=True) 
