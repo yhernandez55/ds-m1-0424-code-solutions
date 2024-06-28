@@ -1,19 +1,21 @@
 USE telecom;
 
-# part 1
-CREATE TEMPORARY TABLE temp_log_feature AS
+# Part 1
+CREATE TEMPORARY TABLE dsstudent.temp_log_feature AS
 SELECT *,
-	CASE 
-		WHEN volume < 100 THEN "low"
-		WHEN volume >= 100 AND volume <= 500 THEN "medium"
-		WHEN volume > 500 THEN "large"
-		ELSE "unknown"
-	END volume_1
+    CASE 
+        WHEN volume < 100 THEN 'low'
+        WHEN volume >= 100 AND volume <= 500 THEN 'medium'
+        WHEN volume > 500 THEN 'large'
+        ELSE 'unknown'
+    END AS volume_1
 FROM log_feature;
 
 SELECT volume_1, count(*)
-FROM temp_log_feature
+FROM dsstudent.temp_log_feature
 GROUP BY volume_1;
+
+DROP TEMPORARY TABLE dsstudent.temp_log_feature;
 
 # part 2
 
