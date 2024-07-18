@@ -22,10 +22,11 @@ def grid_train_random_forest(X, y, params, n_folds=4, eval_metric='accuracy'):
     Examples:
         model = grid_train_random_forest(X, y, params, 4, "accuracy")
     """
-    grid_search = GridSearchCV(RandomForestClassifier(), param_grid=params, scoring='accuracy', cv=5, n_jobs=-1) 
-    grid_search.fit(X, y)
-    rf_model = grid_search.best_estimator_
-    return rf_model
+    rf = RandomForestClassifier()
+    grid = GridSearchCV(rf, params, cv=n_folds, scoring=eval_metric)
+    grid.fit(X, y)
+    model = grid.best_estimator_
+    return model
 
 
 def calc_roc_metrics(X, y, model):
@@ -74,6 +75,6 @@ def train_xgboost(X_train, y_train, X_test, y_test, params, n_round):
     y_train_encoded = le.fit_transform(y_train)
     y_test_encoded = le.transform(y_test)
 
-    xgb_model = XGBClassifier(**params)
-    xgb_model.fit(X_train, y_train_encoded, eval_set=[(X_test, y_test_encoded)])
-    return xgb_model
+    model = XGBClassifier(**params, n_estimators=n_round) 
+    model.fit(X_train, y_train_encoded, eval_set=[(X_test, y_test_encoded)])
+    return model
